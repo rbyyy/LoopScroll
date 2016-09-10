@@ -13,6 +13,7 @@
 @property (nonatomic, assign) BOOL      isHasBorder;
 @property (nonatomic, assign) CGSize    size;
 @property (nonatomic, strong) UIColor   *currentSelectColor;
+@property (nonatomic, strong) UIColor   *currentUnSelectColor;
 @property (nonatomic, strong) UIColor   *borderColor;
 
 @end

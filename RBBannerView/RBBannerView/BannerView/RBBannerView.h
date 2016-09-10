@@ -10,7 +10,7 @@
 
 @interface RBBannerView : UIView
 
-@property (nonatomic, strong, readonly) NSMutableArray  *items;
+@property (nonatomic, copy) void (^currentClick)(NSInteger currentClick);
 
 - (void)setItems:(NSMutableArray *)items time:(CGFloat)time;
 

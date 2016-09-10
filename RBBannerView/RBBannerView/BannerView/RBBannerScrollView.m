@@ -7,12 +7,18 @@
 //
 
 #import "RBBannerScrollView.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #define SHOWIMGCOUNT    3
 
 @interface RBBannerScrollView ()
 
-@property (nonatomic, strong) NSTimer         *timer;
+/**
+ 图片切换时间
+ */
+@property (nonatomic, assign, readonly) CGFloat         time;
+@property (nonatomic, strong) NSTimer                   *timer;
+@property (nonatomic, strong, readonly) NSMutableArray  *items;
 
 @end
 
@@ -29,7 +35,6 @@
         self.showsHorizontalScrollIndicator = NO;
         self.pagingEnabled = YES;
         self.delegate = self;
-        
     }
     return self;
 }
@@ -89,9 +94,10 @@
 
 - (void)addItemView:(NSMutableArray *)array index:(NSInteger)index
 {
-    UIView *itemView = [UIView new];
+    UIImageView *itemView = [UIImageView new];
     itemView.frame = CGRectOffset(self.frame, self.frame.size.width * index, 0);
-    [itemView setBackgroundColor:[array objectAtIndex:index]];
+    [itemView sd_setImageWithURL:[NSURL URLWithString:[array objectAtIndex:index]]];
+    [itemView setUserInteractionEnabled:YES];
     [self addSubview:itemView];
 }
 

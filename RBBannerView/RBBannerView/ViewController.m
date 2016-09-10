@@ -8,7 +8,6 @@
 
 #import "ViewController.h"
 #import "RBBannerView.h"
-#import "RBCommonDefine.h"
 
 
 #define SCREEN_WIDTH    ([UIScreen mainScreen].bounds.size.width)
@@ -35,6 +34,9 @@
 {
     self.bannerView = [[RBBannerView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
     [self.bannerView setItems:[self setItemViewsData] time:4.0];
+    self.bannerView.currentClick = ^(NSInteger currentPage){
+        NSLog(@"currentpage:%ld", (long)currentPage);
+    };
     [self.view addSubview:self.bannerView];
 }
 
@@ -43,35 +45,12 @@
 - (NSMutableArray *)setItemViewsData
 {
     self.items = [NSMutableArray array];
-    for (int i = 0; i < 7; i++) {
-        [self.items addObject:[self getColor:i]];
-    }
+    [self.items addObject:@"http://newpaper.dahe.cn/hnrb/images/2012-10/30/05/hnrb20121030b005cb008.jpg"];
+    [self.items addObject:@"http://desk.fd.zol-img.com.cn/g5/M00/02/08/ChMkJlbKzJeIeOo7AAaYlLIcizIAALI3gJ2JbcABpis612.jpg"];
+    [self.items addObject:@"http://b.zol-img.com.cn/desk/bizhi/image/3/960x600/1380420830797.jpg"];
+    [self.items addObject:@"http://www.pp3.cn/uploads/201403/1387418666895.jpg"];
     return self.items;
 }
-
-- (UIColor *)getColor:(NSInteger)number
-{
-    UIColor *color = [UIColor whiteColor];
-    if (number%4 == 0) {
-        color = [self genColor:255.0 green:0 blue:0];
-    } else if (number%4 == 1) {
-        color = [self genColor:0 green:255.0 blue:0];
-    } else if (number%4 == 2) {
-        color = [self genColor:0 green:0 blue:255.0];
-    } else if(number%4 == 3) {
-        color = [self genColor:255.0 green:255.0 blue:0];
-    } else {
-        color = [self genColor:125.0 green:255.0 blue:0];
-    }
-    return color;
-}
-
-- (UIColor *)genColor:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue
-{
-    UIColor *color = [UIColor colorWithRed:red/255.0 green:green/255.0 blue:blue/255.0 alpha:1.0];
-    return color;
-}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

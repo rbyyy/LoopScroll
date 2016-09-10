@@ -19,7 +19,7 @@
             dot.backgroundColor = _currentSelectColor;
             dot.layer.cornerRadius = dot.frame.size.height / 2;
         } else {
-            dot.backgroundColor = [UIColor whiteColor];
+            dot.backgroundColor = _currentUnSelectColor;
             dot.layer.cornerRadius = dot.frame.size.height / 2;
             if (_isHasBorder) {
                 dot.layer.borderColor = _borderColor.CGColor;
