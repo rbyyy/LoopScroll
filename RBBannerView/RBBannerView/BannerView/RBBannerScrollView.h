@@ -10,6 +10,7 @@
 
 @interface RBBannerScrollView : UIScrollView<UIScrollViewDelegate>
 
+@property (nonatomic, assign) BOOL autoScroll;
 @property (nonatomic, copy) void (^currentPage)(NSInteger currentPage);
 
 - (void)setItems:(NSMutableArray *)items time:(CGFloat)time;

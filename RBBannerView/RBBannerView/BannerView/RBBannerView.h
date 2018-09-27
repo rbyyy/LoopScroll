@@ -10,6 +10,7 @@
 
 @interface RBBannerView : UIView
 
+@property (nonatomic, assign) BOOL autoScroll;
 @property (nonatomic, copy) void (^currentClick)(NSInteger currentClick);
 
 - (void)setItems:(NSMutableArray *)items time:(CGFloat)time;

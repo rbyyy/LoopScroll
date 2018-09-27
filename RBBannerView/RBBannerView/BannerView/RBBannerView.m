@@ -51,6 +51,7 @@
         _curPage = 0;
         _items = items;
         _time = time;
+		self.bannerScrollView.autoScroll = _autoScroll;
         [self.bannerScrollView setItems:self.items time:time];
         [_pageControl setNumberOfPages:[self.items count]];
     }

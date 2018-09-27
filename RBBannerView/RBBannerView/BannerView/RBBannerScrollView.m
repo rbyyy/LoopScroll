@@ -47,10 +47,12 @@
         _time = time;
         _curPage = 0;
         _items = items;
-        if (![self singlePage]) {
-            [self loadData];
+		[self loadData];
+        if (_autoScroll) {
             [self startTimer];
-        }
+		} else {
+			[self stopTimer];
+		}
     }
 }
 
@@ -66,11 +68,8 @@
 
 - (BOOL)singlePage
 {
-    [self removeAllItemViews];
     if (_items != nil && [_items count] > 0) {
         if ([_items count] == 1) {
-            self.scrollEnabled = NO;
-            [self addItemView:_items index:0];
             return YES;
         }
     }
@@ -81,14 +80,19 @@
 {
     [self removeAllItemViews];
     if (_items != nil && [_items count] > 0) {
-        self.scrollEnabled = YES;
         _totalPage = [_items count];
-        NSMutableArray *array = [self replaceItemViews];
-        self.contentSize = CGSizeMake(self.frame.size.width * [array count], self.frame.size.height);
-        for (int si = 0; si < SHOWIMGCOUNT; si++) {
-            [self addItemView:array index:si];
-        }
-        [self setContentOffset:CGPointMake([UIScreen mainScreen].bounds.size.width, 0)];
+		if (_totalPage > 1) {
+			NSMutableArray *array = [self replaceItemViews];
+			self.contentSize = CGSizeMake(self.frame.size.width * [array count], self.frame.size.height);
+			for (int si = 0; si < SHOWIMGCOUNT; si++) {
+				[self addItemView:array index:si];
+			}
+			self.scrollEnabled = YES;
+			[self setContentOffset:CGPointMake([UIScreen mainScreen].bounds.size.width, 0)];
+		} else {
+			[self addItemView:_items index:0];
+			self.scrollEnabled = NO;
+		}
     }
 }
 
@@ -136,31 +140,50 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    CGFloat xOffset = scrollView.contentOffset.x;
-    if (xOffset >= 2*(self.frame.size.width)) {
-        _curPage = [self currentShow:_curPage + 1];
-        [self loadData];
-        if (self.currentPage) {
-            self.currentPage(_curPage);
-        }
-    }
-    if (xOffset <= 0) {
-        _curPage = [self currentShow:_curPage - 1];
-        [self loadData];
-        if (self.currentPage) {
-            self.currentPage(_curPage);
-        }
-    }
+	[self calcCurPage:scrollView];
+}
+
+- (void)calcCurPage:(UIScrollView *)scrollView
+{
+	CGFloat xOffset = scrollView.contentOffset.x;
+	if (xOffset >= 2*(self.frame.size.width)) {
+		_curPage = [self currentShow:_curPage + 1];
+		[self loadData];
+		if (self.currentPage) {
+			self.currentPage(_curPage);
+		}
+	}
+	if (xOffset <= 0) {
+		_curPage = [self currentShow:_curPage - 1];
+		[self loadData];
+		if (self.currentPage) {
+			self.currentPage(_curPage);
+		}
+	}
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    [self stopTimer];
+	if (self.timer) {
+		[self.timer invalidate];
+	}
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    [self startTimer];
+	if (_autoScroll && ![self singlePage]) {
+		if (self.timer) {
+			[self.timer invalidate];
+		}
+		[self startTimer];
+	}
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+	if (![self singlePage]) {
+		[self calcCurPage:scrollView];
+	}
 }
 
 #pragma mark - timer

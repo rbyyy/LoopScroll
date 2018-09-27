@@ -33,6 +33,7 @@
 - (void)addBannerView
 {
     self.bannerView = [[RBBannerView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
+	self.bannerView.autoScroll = YES;
     [self.bannerView setItems:[self setItemViewsData] time:4.0];
     self.bannerView.currentClick = ^(NSInteger currentPage){
         NSLog(@"currentpage:%ld", (long)currentPage);
@@ -48,7 +49,7 @@
     [self.items addObject:@"http://newpaper.dahe.cn/hnrb/images/2012-10/30/05/hnrb20121030b005cb008.jpg"];
     [self.items addObject:@"http://desk.fd.zol-img.com.cn/g5/M00/02/08/ChMkJlbKzJeIeOo7AAaYlLIcizIAALI3gJ2JbcABpis612.jpg"];
     [self.items addObject:@"http://b.zol-img.com.cn/desk/bizhi/image/3/960x600/1380420830797.jpg"];
-    [self.items addObject:@"http://www.pp3.cn/uploads/201403/1387418666895.jpg"];
+    [self.items addObject:@"http://desk.fd.zol-img.com.cn/g5/M00/02/08/ChMkJlbKzJeIeOo7AAaYlLIcizIAALI3gJ2JbcABpis612.jpg"];
     return self.items;
 }
 

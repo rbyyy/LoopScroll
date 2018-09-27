@@ -133,12 +133,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A516E5041D76D47100242AFD /* Build configuration list for PBXNativeTarget "RBBannerView" */;
 			buildPhases = (
+				1596E8D3E69D43414A9EEF6F /* [CP] Check Pods Manifest.lock */,
 				593B74EEF58BCAB77EBE3F96 /* 📦 Check Pods Manifest.lock */,
 				A516E4E91D76D47100242AFD /* Sources */,
 				A516E4EA1D76D47100242AFD /* Frameworks */,
 				A516E4EB1D76D47100242AFD /* Resources */,
-				C9CF3E250638D4623BB73978 /* 📦 Embed Pods Frameworks */,
-				20853750A7FDCA5B21BDCA4B /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -195,19 +194,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		20853750A7FDCA5B21BDCA4B /* 📦 Copy Pods Resources */ = {
+		1596E8D3E69D43414A9EEF6F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RBBannerView-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RBBannerView/Pods-RBBannerView-resources.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		593B74EEF58BCAB77EBE3F96 /* 📦 Check Pods Manifest.lock */ = {
@@ -223,21 +225,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		C9CF3E250638D4623BB73978 /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RBBannerView/Pods-RBBannerView-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
