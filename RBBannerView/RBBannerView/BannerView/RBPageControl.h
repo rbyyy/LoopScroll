@@ -8,12 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class RBPageControlData;
+
 @interface RBPageControl : UIPageControl
 
-@property (nonatomic, assign) BOOL      isHasBorder;
-@property (nonatomic, assign) CGSize    size;
-@property (nonatomic, strong) UIColor   *currentSelectColor;
-@property (nonatomic, strong) UIColor   *currentUnSelectColor;
-@property (nonatomic, strong) UIColor   *borderColor;
+@property (nonatomic, strong) RBPageControlData *pageControlData;
 
 @end

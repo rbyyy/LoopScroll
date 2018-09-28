@@ -9,6 +9,7 @@
 #import "RBBannerView.h"
 #import "RBBannerScrollView.h"
 #import "RBPageControl.h"
+#import "RBPageControlData.h"
 
 @interface RBBannerView ()
 
@@ -54,8 +55,34 @@
 		self.bannerScrollView.autoScroll = _autoScroll;
         [self.bannerScrollView setItems:self.items time:time];
         [_pageControl setNumberOfPages:[self.items count]];
+		[_pageControl setPageControlData:[self pageControlData]];
+		[self pageControlFrameDirection:_pageControlDirection];
     }
 }
+
+- (void)pageControlFrameDirection:(RBPageControlDirection)direction
+{
+	NSInteger count = [self.items count];
+	CGSize pointSize = [_pageControl sizeForNumberOfPages:count];
+	CGFloat page_x = (_pageControl.bounds.size.width - pointSize.width) / 2;
+	CGRect frame = CGRectZero;
+	switch (direction) {
+		case RBPageControlDirectionLeft:
+			frame = CGRectMake(page_x - 10, _pageControl.bounds.origin.y,
+							   _pageControl.bounds.size.width, _pageControl.bounds.size.height);
+			break;
+		case RBPageControlDirectionRight:
+			frame = CGRectMake(-page_x + 10, _pageControl.bounds.origin.y,
+							   _pageControl.bounds.size.width, _pageControl.bounds.size.height);
+			break;
+		default:
+			return;
+			break;
+	}
+	
+	[_pageControl setBounds:frame];
+}
+
 
 #pragma mark - add views
 
@@ -75,13 +102,34 @@
 - (void)addPageControl
 {
     _pageControl = [[RBPageControl alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 20, self.frame.size.width, 8)];
-    [_pageControl setSize:CGSizeMake(6, 6)];
-    [_pageControl setCurrentSelectColor:[UIColor whiteColor]];
-    [_pageControl setCurrentUnSelectColor:[UIColor grayColor]];
-    [_pageControl setIsHasBorder:NO];
+	[_pageControl setPageControlData:[self pageControlData]];
     [_pageControl setHidesForSinglePage:YES];
     [_pageControl setUserInteractionEnabled:NO];
     [_pageControl setCurrentPage:0];
+}
+
+- (RBPageControlData *)pageControlData
+{
+	if (!_pageControlData) {
+		_pageControlData = [RBPageControlData new];
+	}
+	_pageControlData.size = [self pageControlDotSize];
+	_pageControlData.currentSelectColor = _pageControlData.currentSelectColor?:[UIColor whiteColor];
+	_pageControlData.currentUnSelectColor = _pageControlData.currentUnSelectColor?:[UIColor grayColor];
+	_pageControlData.isHasBorder = _pageControlData.isHasBorder;
+	_pageControlData.selectedBorderWidth = _pageControlData.selectedBorderWidth;
+	_pageControlData.unselectedBorderWidth = _pageControlData.unselectedBorderWidth;
+	_pageControlData.borderColor = _pageControlData.borderColor?:[UIColor whiteColor];
+	_pageControlData.dotUnselectedStyle = _pageControlData.dotUnselectedStyle?:RBDotUnselectedStyleCircle;
+	return _pageControlData;
+}
+
+- (CGSize)pageControlDotSize
+{
+	if (CGSizeEqualToSize(_pageControlData.size, CGSizeZero)) {
+		return CGSizeMake(6, 6);
+	}
+	return _pageControlData.size;
 }
 
 #pragma mark - click action

@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "RBBannerView.h"
+#import "RBPageControlData.h"
 
 
 #define SCREEN_WIDTH    ([UIScreen mainScreen].bounds.size.width)
@@ -34,7 +35,20 @@
 {
     self.bannerView = [[RBBannerView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
 	self.bannerView.autoScroll = YES;
+//	[self.bannerView setPageControlDirection:RBPageControlDirectionRight];
+	RBPageControlData *data = [RBPageControlData new];
+	[data setSize:CGSizeMake(6, 6)];
+	[data setSelectedBorderWidth:1.0];
+	[data setUnselectedBorderWidth:0];
+	[data setCurrentSelectColor:[UIColor clearColor]];
+	[data setCurrentUnSelectColor:[UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1.0]];
+	[data setIsHasBorder:YES];
+	[data setBorderColor:[UIColor colorWithRed:49.0/255.0 green:176.0/255.0 blue:133.0/255.0 alpha:1.0]];
+	[data setDotUnselectedStyle:RBDotUnselectedStyleFlat];
+	[self.bannerView setPageControlData:data];
+	
     [self.bannerView setItems:[self setItemViewsData] time:4.0];
+	
     self.bannerView.currentClick = ^(NSInteger currentPage){
         NSLog(@"currentpage:%ld", (long)currentPage);
     };

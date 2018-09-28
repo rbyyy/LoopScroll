@@ -16,6 +16,7 @@
 		A516E50A1D76D6C900242AFD /* RBBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A516E5091D76D6C900242AFD /* RBBannerView.m */; };
 		A516E50D1D76D77500242AFD /* RBBannerScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = A516E50C1D76D77500242AFD /* RBBannerScrollView.m */; };
 		A58527FF1D7E60D200A41C27 /* RBPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A58527FE1D7E60D200A41C27 /* RBPageControl.m */; };
+		A58B7200215D0D0500557EAD /* RBPageControlData.m in Sources */ = {isa = PBXBuildFile; fileRef = A58B71FF215D0D0500557EAD /* RBPageControlData.m */; };
 		CB701074F89EECB38614914A /* libPods-RBBannerView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7663F5B32771A90854A4EA81 /* libPods-RBBannerView.a */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,8 @@
 		A516E50C1D76D77500242AFD /* RBBannerScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBBannerScrollView.m; sourceTree = "<group>"; };
 		A58527FD1D7E60D200A41C27 /* RBPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBPageControl.h; sourceTree = "<group>"; };
 		A58527FE1D7E60D200A41C27 /* RBPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBPageControl.m; sourceTree = "<group>"; };
+		A58B71FE215D0D0500557EAD /* RBPageControlData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RBPageControlData.h; sourceTree = "<group>"; };
+		A58B71FF215D0D0500557EAD /* RBPageControlData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RBPageControlData.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +125,8 @@
 				A516E50C1D76D77500242AFD /* RBBannerScrollView.m */,
 				A58527FD1D7E60D200A41C27 /* RBPageControl.h */,
 				A58527FE1D7E60D200A41C27 /* RBPageControl.m */,
+				A58B71FE215D0D0500557EAD /* RBPageControlData.h */,
+				A58B71FF215D0D0500557EAD /* RBPageControlData.m */,
 			);
 			path = BannerView;
 			sourceTree = "<group>";
@@ -236,6 +241,7 @@
 			files = (
 				A516E50D1D76D77500242AFD /* RBBannerScrollView.m in Sources */,
 				A516E4F81D76D47100242AFD /* ViewController.m in Sources */,
+				A58B7200215D0D0500557EAD /* RBPageControlData.m in Sources */,
 				A516E4F51D76D47100242AFD /* AppDelegate.m in Sources */,
 				A58527FF1D7E60D200A41C27 /* RBPageControl.m in Sources */,
 				A516E50A1D76D6C900242AFD /* RBBannerView.m in Sources */,
