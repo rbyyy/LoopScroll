@@ -92,7 +92,7 @@
     __weak typeof(self) weakSelf = self;
     self.bannerScrollView.currentPage = ^(NSInteger currentPage){
         __strong typeof(self) strongSelf = weakSelf;
-        _curPage = currentPage;
+        strongSelf->_curPage = currentPage;
         if (strongSelf.pageControl) {
             [strongSelf.pageControl setCurrentPage:currentPage];
         }
