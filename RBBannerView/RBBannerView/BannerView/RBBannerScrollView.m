@@ -165,7 +165,7 @@
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
 	if (self.timer) {
-		[self.timer invalidate];
+		[self stopTimer];
 	}
 }
 
@@ -173,7 +173,7 @@
 {
 	if (_autoScroll && ![self singlePage]) {
 		if (self.timer) {
-			[self.timer invalidate];
+			[self stopTimer];
 		}
 		[self startTimer];
 	}
@@ -190,9 +190,10 @@
 
 - (void)startTimer
 {
-    NSTimer *timer = [NSTimer timerWithTimeInterval:self.time target:self selector:@selector(scrollViewGoScroll) userInfo:nil repeats:YES];
-    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
-    self.timer = timer;
+	if (!_timer) {
+		_timer = [NSTimer timerWithTimeInterval:self.time target:self selector:@selector(scrollViewGoScroll) userInfo:nil repeats:YES];
+		[[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+	}
 }
 
 - (void)stopTimer
