@@ -88,7 +88,7 @@
 				[self addItemView:array index:si];
 			}
 			self.scrollEnabled = YES;
-			[self setContentOffset:CGPointMake([UIScreen mainScreen].bounds.size.width, 0)];
+			[self setContentOffset:CGPointMake(self.frame.size.width, 0)];
 		} else {
 			[self addItemView:_items index:0];
 			self.scrollEnabled = NO;
